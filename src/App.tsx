@@ -14,8 +14,7 @@ function App() {
     <ThemeProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <CssBaseline />
-        {/* {content} */}
-        <h1>test</h1>
+        {content}
       </LocalizationProvider>
     </ThemeProvider>
   );

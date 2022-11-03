@@ -17,6 +17,7 @@ import Customization from "./Customization";
 import { GiveawayData } from "../interface";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useNavigate } from "react-router";
+import api from "src/helpers/apiCall";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -106,10 +107,15 @@ const CreateGiveawayContainer = () => {
 
     return isValid;
   };
+  console.log("giveawayData", giveawayData);
 
-  const onCreateCampaign = () => {
+  const onCreateCampaign = async () => {
     if (isValidForm()) {
-      navigate("/giveaway/manage");
+      const data: GiveawayData = await api.post(
+        "giveaway/create",
+        giveawayData
+      );
+      navigate(`${data.id}/${data.giveaway_name}`);
     }
   };
 

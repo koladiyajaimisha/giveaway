@@ -12,6 +12,7 @@ export interface Prize {
 }
 
 export interface GiveawayData {
+  id?: string;
   giveaway_name: string;
   description: string;
   rules: string;
