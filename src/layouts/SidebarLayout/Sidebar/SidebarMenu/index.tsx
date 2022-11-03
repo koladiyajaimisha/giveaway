@@ -199,7 +199,7 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/"
+                  to="/giveaway/manage"
                   startIcon={<ListOutlinedIcon />}
                 >
                   Manage Giveaways

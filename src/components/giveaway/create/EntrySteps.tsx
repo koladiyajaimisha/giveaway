@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/system';
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import React, { useState, useEffect } from "react";
+import { Button, Grid } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 
-import YouTube from './entrySteps/YouTube';
-import youtube_icon from '../../../images/youtube_icon.svg';
-import twitter_icon from '../../../images/twitter_icon.svg';
-import facebook_icon from '../../../images/facebook_icon.png';
-import instagram_icon from '../../../images/instagram_icon.svg';
-import linkedin_icon from '../../../images/linkedin_icon.svg';
-import snapchat_icon from '../../../images/snapchat_icon.png';
-import Twitter from './entrySteps/Twitter';
-import { Step } from '../interface';
-import Facebook from './entrySteps/Facebook';
-import Instagram from './entrySteps/Instagram';
-import Linkedin from './entrySteps/Linkedin';
-import Snapchat from './entrySteps/Snapchat';
+import YouTube from "./entrySteps/YouTube";
+import youtube_icon from "../../../images/youtube_icon.svg";
+import twitter_icon from "../../../images/twitter_icon.svg";
+import facebook_icon from "../../../images/facebook_icon.png";
+import instagram_icon from "../../../images/instagram_icon.svg";
+import linkedin_icon from "../../../images/linkedin_icon.svg";
+import snapchat_icon from "../../../images/snapchat_icon.png";
+import Twitter from "./entrySteps/Twitter";
+import { Step } from "../interface";
+import Facebook from "./entrySteps/Facebook";
+import Instagram from "./entrySteps/Instagram";
+import Linkedin from "./entrySteps/Linkedin";
+import Snapchat from "./entrySteps/Snapchat";
 
 interface Props {
   setExpanded: (s: string) => void;
   customHandleChange: (name: string, value: any) => void;
 }
+
+const stepInitialData = {
+  type: "",
+  action: "",
+  title: "",
+  url: "",
+  tweet: "",
+};
 
 const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
   const [steps, setSteps] = useState<Step[]>([]);
@@ -48,7 +56,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
   };
 
   useEffect(() => {
-    customHandleChange('steps', steps);
+    customHandleChange("steps", steps);
   }, [steps]);
 
   const getStepComponent = (
@@ -56,7 +64,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
     index: number
   ): ReactJSXElement | null => {
     switch (step.type) {
-      case 'youtube':
+      case "youtube":
         return (
           <YouTube
             index={index}
@@ -65,7 +73,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             onInputChange={onInputChange}
           />
         );
-      case 'twitter':
+      case "twitter":
         return (
           <Twitter
             index={index}
@@ -74,7 +82,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             onInputChange={onInputChange}
           />
         );
-      case 'facebook':
+      case "facebook":
         return (
           <Facebook
             index={index}
@@ -83,7 +91,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             onInputChange={onInputChange}
           />
         );
-      case 'instagram':
+      case "instagram":
         return (
           <Instagram
             index={index}
@@ -92,7 +100,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             onInputChange={onInputChange}
           />
         );
-      case 'linkedin':
+      case "linkedin":
         return (
           <Linkedin
             index={index}
@@ -101,7 +109,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             onInputChange={onInputChange}
           />
         );
-      case 'snapchat':
+      case "snapchat":
         return (
           <Snapchat
             index={index}
@@ -114,10 +122,10 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
         return null;
     }
   };
-  console.log('steps', steps);
+  console.log("steps", steps);
 
   const onStepsClick = (type: string): void => {
-    if (steps.length < 8) setSteps([...steps, { type }]);
+    if (steps.length < 8) setSteps([...steps, { ...stepInitialData, type }]);
   };
 
   return (
@@ -139,7 +147,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={youtube_icon} />}
             fullWidth
-            onClick={() => onStepsClick('youtube')}
+            onClick={() => onStepsClick("youtube")}
           >
             Youtube
           </Button>
@@ -150,7 +158,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={twitter_icon} />}
             fullWidth
-            onClick={() => onStepsClick('twitter')}
+            onClick={() => onStepsClick("twitter")}
           >
             Twitter
           </Button>
@@ -161,7 +169,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={facebook_icon} />}
             fullWidth
-            onClick={() => onStepsClick('facebook')}
+            onClick={() => onStepsClick("facebook")}
           >
             Facebook
           </Button>
@@ -172,7 +180,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={instagram_icon} />}
             fullWidth
-            onClick={() => onStepsClick('instagram')}
+            onClick={() => onStepsClick("instagram")}
           >
             Instagram
           </Button>
@@ -183,7 +191,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={linkedin_icon} />}
             fullWidth
-            onClick={() => onStepsClick('linkedin')}
+            onClick={() => onStepsClick("linkedin")}
           >
             Linkedin
           </Button>
@@ -194,7 +202,7 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
             className="text-black"
             startIcon={<img width={26} src={snapchat_icon} />}
             fullWidth
-            onClick={() => onStepsClick('snapchat')}
+            onClick={() => onStepsClick("snapchat")}
           >
             Snapchat
           </Button>
@@ -209,9 +217,9 @@ const EntrySteps: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
       </Grid>
       <Box display="flex" justifyContent="center" marginTop="20px">
         <Button
-          sx={{ maxWidth: '250px', width: '100%' }}
+          sx={{ maxWidth: "250px", width: "100%" }}
           variant="contained"
-          onClick={() => setExpanded('prizes')}
+          onClick={() => setExpanded("prizes")}
         >
           Continue
         </Button>

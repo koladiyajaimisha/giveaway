@@ -5,7 +5,11 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { CloseOutlined } from '@mui/icons-material';
 
-const Customization = () => {
+interface Props {
+  customHandleChange: (name: string, value: any) => void;
+}
+
+const Customization: React.FC<Props> = ({ customHandleChange }) => {
   const [image, setImage] = useState<string>('');
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -16,6 +20,7 @@ const Customization = () => {
       const src = URL.createObjectURL(file);
       setImage(src);
     }
+    customHandleChange("image", file)
   };
 
   return (
@@ -41,6 +46,7 @@ const Customization = () => {
             multiple
             type="file"
             onChange={handleImageChange}
+            className="outline-none"
           />
         </Button>
         <input

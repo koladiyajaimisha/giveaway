@@ -15,7 +15,7 @@ const HomePageComponent = () => {
   return (
     <>
       <Helmet>
-        <title>Crypto Dashboard</title>
+        <title>Home | Giveaway</title>
       </Helmet>
       <Container maxWidth="lg">
         <Grid

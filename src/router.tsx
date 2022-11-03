@@ -1,13 +1,13 @@
-import { Suspense, lazy } from 'react';
-import { Navigate } from 'react-router-dom';
-import { RouteObject } from 'react-router';
+import { Suspense, lazy } from "react";
+import { Navigate } from "react-router-dom";
+import { RouteObject } from "react-router";
 
-import SidebarLayout from 'src/layouts/SidebarLayout';
-import BaseLayout from 'src/layouts/BaseLayout';
+import SidebarLayout from "src/layouts/SidebarLayout";
 
-import SuspenseLoader from 'src/components/SuspenseLoader';
-import HomePageComponent from './components/home';
-import CreateGiveawayContainer from './components/giveaway/create';
+import SuspenseLoader from "src/components/SuspenseLoader";
+import HomePageComponent from "./components/home";
+import CreateGiveawayContainer from "./components/giveaway/create";
+import ManageGiveaway from "./components/giveaway/manage";
 
 const Loader = (Component) => (props) =>
   (
@@ -18,29 +18,31 @@ const Loader = (Component) => (props) =>
 
 // Dashboards
 
-const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
-
 const routes: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     element: <SidebarLayout />,
     children: [
       {
-        path: '',
-        element: <HomePageComponent />
-      }
-    ]
+        path: "",
+        element: <HomePageComponent />,
+      },
+    ],
   },
   {
-    path: '/giveaway',
+    path: "/giveaway",
     element: <SidebarLayout />,
     children: [
       {
-        path: '/giveaway/create',
-        element: <CreateGiveawayContainer />
-      }
-    ]
-  }
+        path: "/giveaway/create",
+        element: <CreateGiveawayContainer />,
+      },
+      {
+        path: "/giveaway/manage",
+        element: <ManageGiveaway />,
+      },
+    ],
+  },
 ];
 
 export default routes;

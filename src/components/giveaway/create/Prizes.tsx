@@ -7,18 +7,40 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
 interface PrizesData {
-  prizeName: '';
-  PrizeValue: '';
+  name: '';
+  value: '';
 }
 
-const Prizes = ({ setExpanded }) => {
+interface Props {
+  setExpanded: (s: string) => void;
+  customHandleChange: (name: string, value: any) => void;
+}
+
+const Prizes: React.FC<Props> = ({ setExpanded, customHandleChange }) => {
   const [numberOfPrizes, setNumberOfPrizes] = useState(1);
   const [prizesData, setPrizesData] = useState<PrizesData[]>(
     Array(5).fill({
-      prizeName: '',
-      PrizeValue: ''
+      name: '',
+      value: ''
     })
   );
+
+  const onHandleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
+    const { name, value } = e.target;
+
+    const newArray = prizesData.map((item, i) => {
+      if (index === i) {
+        return { ...item, [e.target.name]: e.target.value };
+      } else {
+        return item;
+      }
+    });
+    setPrizesData(newArray);
+  }
+
+  useEffect(() => {
+    customHandleChange("prizes", prizesData.slice(0, numberOfPrizes))
+  }, [numberOfPrizes,prizesData])
 
   return (
     <>
@@ -40,24 +62,29 @@ const Prizes = ({ setExpanded }) => {
         <Button onClick={() => setNumberOfPrizes(5)}>5</Button>
       </ButtonGroup>
       <Grid container spacing={2} marginTop="20px">
-        {prizesData.slice(0, numberOfPrizes).map(() => (
+        {prizesData.slice(0, numberOfPrizes).map((data, index) => (
           <>
             <Grid item xs={6}>
               <TextField
                 size="small"
-                id="prizeName"
+                name="name"
                 label="Prize Name"
                 type="text"
                 fullWidth
+                value={data.name}
+                onChange={(e) => onHandleChange(e, index)}
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 size="small"
-                id="prizeName"
+                name="value"
                 label="Prize Value - Example: $100/£100"
                 type="text"
                 fullWidth
+                value={data.value}
+
+                onChange={(e) => onHandleChange(e, index)}
               />
             </Grid>
           </>
